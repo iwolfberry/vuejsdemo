@@ -1,0 +1,101 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>vue入门</title>
+    <script src="vue.js"></script>
+</head>
+
+<body>
+    <!--内容显示-->
+    <div id="root">{{msg}} <br>
+
+        <!--文本内容显示-->
+        <p v-text="ptext"></p>
+
+        <!--html内容显示-->
+        <p v-html="phtml"></p>
+
+        <!--事件绑定-->
+        <p v-on:click="pclickhandler">click me</p>
+        <!--事件绑定简写-->
+        <p @click="pclickhandler">click me @</p>
+
+        <!--属性绑定-->
+        <p v-bind:title="ptitle">title show</p>
+        <p :title="ptitle">title show</p>
+
+        <!--单向绑定-->
+        <input :value="pvalue" />
+        <!--双向绑定-->
+        <input v-model="pvalue" />
+
+        <!--数据拼接逻辑-->
+        <p>first name:
+            <input type="text" v-model="firstname" />
+        </p>
+        <p>last name:
+            <input type="text" v-model="lastname" />
+        </p>
+        <p>{{firstname}} {{lastname}}</p>
+
+        <p>{{fullname}}</p>
+
+        <!--监听器-->
+        <p>{{count}}</p>
+
+        <!--v-if 控制显示 ，显示的时候往内容区域插入，不显示的时候，移除-->
+        <p v-if="show">是否显示</p>
+
+        <!--v-show display:none 隐藏-->
+        <p v-show="show">是否显示</p>
+        <button @click="ptogglerclick">toggler</button>
+
+        <!--v:for-->
+        <ul>
+            <li v-for="item of list">{{item}}</li>
+        </ul>
+    </div>
+
+    <script>
+        new Vue({
+            el: '#root',
+            data: {
+                msg: 'hello vue',
+                ptext: '<h1>hello text</h1>',
+                phtml: '<h1>hello html</h1>',
+                ptitle: 'hello this is title',
+                pvalue: 'input value',
+                firstname: 'hello',
+                lastname: 'tom',
+                count: 0,
+                show:true,
+                list:[1,2,3]
+            },
+            computed: {
+                fullname: function () {
+                    return this.firstname + ' ' + this.lastname
+                }
+            },
+            watch: {
+                firstname: function () {
+                    this.count++
+                }
+            },
+            methods: {
+                pclickhandler: function () {
+                    // alert(123);
+                    //改变数据，页面会自动变化
+                    this.msg = 'click vue';
+                },
+                ptogglerclick:function(){
+                    this.show = !this.show
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>
