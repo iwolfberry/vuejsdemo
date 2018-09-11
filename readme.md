@@ -73,4 +73,3 @@ imooc vue2.5:https://www.imooc.com/learn/980
 7、数据监听：watch{}
 
 8、方法区域：methods{}
-
